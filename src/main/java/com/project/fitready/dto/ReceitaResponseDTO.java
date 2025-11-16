@@ -16,9 +16,15 @@ public record ReceitaResponseDTO(
         Long gorduras) {
 
     public ReceitaResponseDTO(Receita receita) {
-        this(receita.getId(), receita.getNome(), receita.getIngredientes(),
-                receita.getModoPreparo(), receita.getTempoPreparo(), receita.getCalorias(),
-                receita.getProteinas(), receita.getCarboidratos(), receita.getGorduras());
+        this(receita.getId(),
+            receita.getNome(),
+            receita.getIngredientes(),
+            receita.getModoPreparo(),
+            receita.getTempoPreparo(),
+            receita.getCalorias(),
+            receita.getProteinas(),
+            receita.getCarboidratos(),
+            receita.getGorduras());
 
     }
 }

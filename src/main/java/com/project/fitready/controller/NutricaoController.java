@@ -20,11 +20,9 @@ public class NutricaoController {
     @GetMapping(path="/all")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ReceitaResponseDTO> getAll() {
-        List<ReceitaResponseDTO> receitas = receitaService.buscarTodasReceitas().stream()
+        return receitaService.buscarTodasReceitas().stream()
                 .map(ReceitaResponseDTO::new)
                 .toList();
-
-        return receitas;
     }
 
     @PostMapping

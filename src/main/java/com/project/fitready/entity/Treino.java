@@ -24,8 +24,11 @@ public class Treino {
     @ManyToOne
     @JoinColumn(name = "id_tipo_treino")
     private TipoTreino tipoTreino;
-    //private List<Exercicio> exercicios;
-    private Long calorias;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id_treino")
+    private List<Exercicio> exercicios;
+
     private LocalDateTime dataInicio;
     private LocalDateTime dataFim;
 }

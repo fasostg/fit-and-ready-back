@@ -23,7 +23,13 @@ public class Exercicio {
     @ManyToOne
     @JoinColumn(name = "id_tipo_exercicio")
     private TipoExercicio tipoExercicio;
+
+    @Column(name = "nr_series")
     private Long numeroSeries;
+    @Column(name = "nr_repeticoes")
     private Long numeroRepeticoes;
-    private LocalDateTime dataFim;
+
+    @ManyToOne
+    @JoinColumn(name = "id_treino", nullable = false)
+    private Treino treino;
 }

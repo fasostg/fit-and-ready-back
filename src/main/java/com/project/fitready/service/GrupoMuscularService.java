@@ -1,26 +1,22 @@
 package com.project.fitready.service;
 
+import com.project.fitready.domain.GrupoMuscular;
 import com.project.fitready.domain.TipoExercicio;
-import com.project.fitready.domain.TipoTreino;
 import com.project.fitready.dto.TipoExercicioDTO;
+import com.project.fitready.repository.GrupoMuscularRepository;
 import com.project.fitready.repository.TipoExercicioRepository;
-import com.project.fitready.repository.TipoTreinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TipoTreinoService {
+public class GrupoMuscularService {
 
     @Autowired
-    private TipoTreinoRepository repository;
+    private GrupoMuscularRepository repository;
 
-    public TipoTreino buscarPorId(Long id) {
-        return repository.findById(id).orElseThrow();
-    }
-
-    public List<TipoTreino> buscarTodos() {
+    public List<GrupoMuscular> buscarTodos() {
         return repository.findAll();
     }
 }

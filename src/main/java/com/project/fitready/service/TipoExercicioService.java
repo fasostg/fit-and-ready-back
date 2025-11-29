@@ -1,5 +1,6 @@
 package com.project.fitready.service;
 
+import com.project.fitready.domain.GrupoMuscular;
 import com.project.fitready.domain.TipoExercicio;
 import com.project.fitready.dto.ExercicioDTO;
 import com.project.fitready.dto.TipoExercicioDTO;
@@ -22,11 +23,16 @@ public class TipoExercicioService {
         return repository.findById(id).orElseThrow();
     }
 
+    public List<TipoExercicio> buscarTodos() {
+        return repository.findAll();
+    }
+
     public TipoExercicio converterDTO(TipoExercicioDTO dto) {
         TipoExercicio tipoExercicio = new TipoExercicio();
 
+        tipoExercicio.setId(dto.id());
         tipoExercicio.setNome(dto.nome());
-        tipoExercicio.setGrupoMuscular(null);
+        tipoExercicio.setGrupoMuscular(new GrupoMuscular(dto.grupoMuscular().id(), dto.grupoMuscular().nome()));
 
         return tipoExercicio;
     }

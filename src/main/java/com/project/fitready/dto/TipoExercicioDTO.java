@@ -2,11 +2,11 @@ package com.project.fitready.dto;
 
 import com.project.fitready.domain.TipoExercicio;
 
-public record TipoExercicioDTO(Long id, String nome, String grupoMuscular) {
+public record TipoExercicioDTO(Long id, String nome, GrupoMuscularDTO grupoMuscular) {
 
     public TipoExercicioDTO(TipoExercicio tipoExercicio) {
         this(tipoExercicio.getId(),
                 tipoExercicio.getNome(),
-                tipoExercicio.getGrupoMuscular().getNome());
+                new GrupoMuscularDTO(tipoExercicio.getGrupoMuscular()));
     }
 }

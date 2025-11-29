@@ -1,13 +1,10 @@
 package com.project.fitready.controller;
 
-import com.project.fitready.dto.CheckinRequestDTO;
-import com.project.fitready.dto.CheckinResponseDTO;
-import com.project.fitready.dto.TreinoRequestDTO;
-import com.project.fitready.dto.TreinoResponseDTO;
+import com.project.fitready.dto.*;
 import com.project.fitready.entity.Checkin;
 import com.project.fitready.entity.Treino;
-import com.project.fitready.service.CheckinService;
-import com.project.fitready.service.TreinoService;
+import com.project.fitready.service.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +17,15 @@ public class TreinoController {
     @Autowired
     private TreinoService treinoService;
 
+    @Autowired
+    private TipoTreinoService tipoTreinoService;
+
+    @Autowired
+    private GrupoMuscularService grupoMuscularService;
+
+    @Autowired
+    private TipoExercicioService tipoExercicioService;
+
     @GetMapping(path="/all")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<TreinoResponseDTO> getAll() {
@@ -28,9 +34,27 @@ public class TreinoController {
 
     @PostMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @Transactional
     public void postTreino(@RequestBody TreinoRequestDTO treinoDTO) {
         Treino treino = treinoService.converterDTO(treinoDTO);
         treinoService.criarTreino(treino);
     }
 
+    @GetMapping(path="/tipos-treino")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<TipoTreinoDTO> getTiposTreino() {
+        return tipoTreinoService.buscarTodos().stream().map(TipoTreinoDTO::new).toList();
+    }
+
+    @GetMapping(path="/grupos-musculares")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<GrupoMuscularDTO> getGruposMusculares() {
+        return grupoMuscularService.buscarTodos().stream().map(GrupoMuscularDTO::new).toList();
+    }
+
+    @GetMapping(path="/tipos-exercicios")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<TipoExercicioDTO> getTiposExercicios() {
+        return tipoExercicioService.buscarTodos().stream().map(TipoExercicioDTO::new).toList();
+    }
 }

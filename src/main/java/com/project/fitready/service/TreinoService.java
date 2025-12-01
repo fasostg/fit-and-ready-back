@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -35,14 +36,36 @@ public class TreinoService {
         return repository.findAll();
     }
 
-    public void criarTreino(Treino treino) {
+    public Treino buscaPorId(Long idTreino) {
+        return repository.findById(idTreino).orElseThrow(() -> new RuntimeException("Treino não encontrado"));
+    }
+
+    public void criarTreino(TreinoRequestDTO treinoDTO) {
+        Treino treino = converterDTO(treinoDTO);
         repository.save(treino);
     }
 
+    public void deletarTreino(Long id) {
+        Treino treino = buscaPorId(id);
+        treino.setDataFim(LocalDate.now());
+        repository.save(treino);
+    }
+
+    public void atualizarTreino(TreinoRequestDTO treinoDTO) {
+        Treino treino = buscaPorId(treinoDTO.id());
+
+        setarCamposTreino(treino, treinoDTO);
+        repository.save(treino);
+    }
 
     public Treino converterDTO(TreinoRequestDTO dto) {
         Treino treino = new Treino();
 
+        setarCamposTreino(treino, dto);
+        return treino;
+    }
+
+    private void setarCamposTreino(Treino treino, TreinoRequestDTO dto) {
         treino.setNome(dto.nome());
         treino.setTipoTreino(tipoTreinoService.buscarPorId(dto.tipoTreino().id()));
         treino.setExercicios(dto.exercicios().stream().map(exercicioDTO -> {
@@ -50,10 +73,7 @@ public class TreinoService {
             exercicio.setTreino(treino);
             return exercicio;
         }).toList());
-
         treino.setDataInicio(LocalDate.parse(dto.dataInicio(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-
-        return treino;
     }
 
     public Exercicio converterExercicioDTO(ExercicioDTO dto) {

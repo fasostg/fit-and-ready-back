@@ -36,8 +36,21 @@ public class TreinoController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
     public void postTreino(@RequestBody TreinoRequestDTO treinoDTO) {
-        Treino treino = treinoService.converterDTO(treinoDTO);
-        treinoService.criarTreino(treino);
+        treinoService.criarTreino(treinoDTO);
+    }
+
+    @DeleteMapping(path="/{id}")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @Transactional
+    public void deleteTreino(@PathVariable Long id) {
+        treinoService.deletarTreino(id);
+    }
+
+    @PatchMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @Transactional
+    public void updateTreino(@RequestBody TreinoRequestDTO treinoDTO) {
+        treinoService.atualizarTreino(treinoDTO);
     }
 
     @GetMapping(path="/tipos-treino")

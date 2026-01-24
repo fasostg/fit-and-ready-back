@@ -1,12 +1,15 @@
 package com.project.fitready.entity;
 
-import com.project.fitready.dto.CheckinRequestDTO;
+import com.project.fitready.domain.Intensidade;
+import com.project.fitready.json.DadosExerciciosJson;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Table(name = "checkin")
 @Entity(name = "Checkin")
@@ -25,6 +28,12 @@ public class Checkin {
     private Long tempoTreino;
     private Long calorias;
     private Double peso;
-    private LocalDateTime data;
+    @ManyToOne
+    @JoinColumn(name = "id_intensidade")
+    private Intensidade intensidade;
+    private LocalDate data;
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "js_dados_exercicios", columnDefinition = "jsonb")
+    private DadosExerciciosJson dadosExercicios;
 
 }

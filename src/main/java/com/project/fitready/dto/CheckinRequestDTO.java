@@ -1,7 +1,14 @@
 package com.project.fitready.dto;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-public record CheckinRequestDTO(Long idTreino, Long tempoTreino, Long calorias, Double peso) {
+public record CheckinRequestDTO(
+        Long idTreino,
+        Long tempoTreino,
+        String dataTreino,
+        Long calorias,
+        Double peso,
+        Long idIntensidade,
+        List<ExercicioDTO> exercicios) {
 
 }

@@ -32,4 +32,9 @@ public class Exercicio {
     @ManyToOne
     @JoinColumn(name = "id_treino", nullable = false)
     private Treino treino;
+
+    @Column(name = "carga")
+    private Long carga;
+    @Column(name = "observacao")
+    private String observacao;
 }

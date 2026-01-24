@@ -2,14 +2,13 @@ package com.project.fitready.dto;
 
 import com.project.fitready.entity.Checkin;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-public record CheckinResponseDTO(Long id, String nomeTreino, Long tempoTreino, Long calorias, LocalDateTime data) {
+public record CheckinResponseDTO(Long id, String nomeTreino, Long tempoTreino, Long calorias, LocalDate dataTreino) {
 
     public CheckinResponseDTO(Checkin checkin) {
         this(checkin.getId(),
-             "nomeTreinoMock",
-             //checkin.getTreino().getNome(),
+             checkin.getTreino() != null ? checkin.getTreino().getNome() : "Nome não disponível",
              checkin.getTempoTreino(),
              checkin.getCalorias(),
              checkin.getData());

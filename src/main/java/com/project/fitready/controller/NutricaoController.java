@@ -2,8 +2,11 @@ package com.project.fitready.controller;
 
 import com.project.fitready.dto.ReceitaRequestDTO;
 import com.project.fitready.dto.ReceitaResponseDTO;
+import com.project.fitready.dto.TipoRefeicaoDTO;
+import com.project.fitready.dto.TipoTreinoDTO;
 import com.project.fitready.entity.Receita;
 import com.project.fitready.service.ReceitaService;
+import com.project.fitready.service.TipoRefeicaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +19,9 @@ public class NutricaoController {
 
     @Autowired
     private ReceitaService receitaService;
+
+    @Autowired
+    private TipoRefeicaoService tipoRefeicaoService;
 
     @GetMapping(path="/all")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -30,6 +36,12 @@ public class NutricaoController {
     public void postReceita(@RequestBody ReceitaRequestDTO receitaDTO) {
         Receita receita = new Receita(receitaDTO);
         receitaService.cadastrarReceita(receita);
+    }
+
+    @GetMapping(path="/tipos-refeicao")
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    public List<TipoRefeicaoDTO> getTiposRefeicao() {
+        return tipoRefeicaoService.buscarTodos().stream().map(TipoRefeicaoDTO::new).toList();
     }
 
 }

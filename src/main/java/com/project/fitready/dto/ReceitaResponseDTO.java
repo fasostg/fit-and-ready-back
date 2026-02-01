@@ -1,5 +1,6 @@
 package com.project.fitready.dto;
 
+import com.project.fitready.entity.IngredienteReceita;
 import com.project.fitready.entity.Receita;
 
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 public record ReceitaResponseDTO(
         Long id,
         String nome,
-        String ingredientes,
+        List<IngredienteReceitaDTO> ingredientes,
         String modoPreparo,
         Long tempoPreparo,
         Long calorias,
@@ -18,7 +19,7 @@ public record ReceitaResponseDTO(
     public ReceitaResponseDTO(Receita receita) {
         this(receita.getId(),
             receita.getNome(),
-            receita.getIngredientes(),
+            receita.getIngredientesReceita().stream().map(IngredienteReceitaDTO::new).toList(),
             receita.getModoPreparo(),
             receita.getTempoPreparo(),
             receita.getCalorias(),

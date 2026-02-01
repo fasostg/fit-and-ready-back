@@ -4,7 +4,7 @@ import java.util.List;
 
 public record ReceitaRequestDTO(
         String nome,
-        String ingredientes,
+        List<IngredienteReceitaDTO> ingredientesReceita,
         String modoPreparo,
         Long tempoPreparo) {
 }

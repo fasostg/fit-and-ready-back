@@ -22,23 +22,11 @@ public class Receita {
     private String nome;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IngredienteReceita> ingredientes;
+    private List<IngredienteReceita> ingredientesReceita;
     private String modoPreparo;
     private Long tempoPreparo;
     private Long calorias;
     private Long proteinas;
     private Long carboidratos;
     private Long gorduras;
-
-
-    public Receita(ReceitaRequestDTO dto) {
-        if (dto == null) {
-            return;
-        }
-
-        this.nome = dto.nome();
-        this.ingredientes = dto.ingredientes();
-        this.modoPreparo = dto.modoPreparo();
-        this.tempoPreparo = dto.tempoPreparo();
-    }
 }

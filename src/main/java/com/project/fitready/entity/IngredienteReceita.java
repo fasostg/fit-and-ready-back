@@ -18,6 +18,8 @@ public class IngredienteReceita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "id_ingrediente")
     private Ingrediente ingrediente;
     private Double quantidade;
 

@@ -22,4 +22,5 @@ public class IngredienteService {
     public List<Ingrediente> buscarTodos() {
         return repository.findAll();
     }
+
 }

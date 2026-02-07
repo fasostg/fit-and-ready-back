@@ -17,4 +17,8 @@ public class Ingrediente {
     @Id
     private Long id;
     private String nome;
+    private Double calorias;
+    private Double proteinas;
+    private Double carboidratos;
+    private Double gorduras;
 }

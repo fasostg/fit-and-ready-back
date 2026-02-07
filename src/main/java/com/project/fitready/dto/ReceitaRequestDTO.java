@@ -6,5 +6,6 @@ public record ReceitaRequestDTO(
         String nome,
         List<IngredienteReceitaDTO> ingredientesReceita,
         String modoPreparo,
-        Long tempoPreparo) {
+        Long tempoPreparo,
+        TipoRefeicaoDTO tipoRefeicao) {
 }

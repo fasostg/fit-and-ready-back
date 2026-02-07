@@ -1,7 +1,6 @@
 package com.project.fitready.entity;
 
 import com.project.fitready.domain.Ingrediente;
-import com.project.fitready.domain.UnidadeMedida;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +23,6 @@ public class IngredienteReceita {
     private Double quantidade;
 
     @ManyToOne
-    @JoinColumn(name = "id_unidade_medida")
-    private UnidadeMedida unidadeMedida;
-
-    @ManyToOne
-    @JoinColumn(name = "id_receita")
+    @JoinColumn(name = "id_receita", nullable = false)
     private Receita receita;
 }

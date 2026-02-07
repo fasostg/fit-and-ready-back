@@ -1,9 +1,10 @@
 package com.project.fitready.controller;
 
 import com.project.fitready.dto.*;
-import com.project.fitready.entity.Checkin;
-import com.project.fitready.entity.Treino;
-import com.project.fitready.service.*;
+import com.project.fitready.service.GrupoMuscularService;
+import com.project.fitready.service.TipoExercicioService;
+import com.project.fitready.service.TipoTreinoService;
+import com.project.fitready.service.TreinoService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

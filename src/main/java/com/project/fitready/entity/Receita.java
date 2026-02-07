@@ -1,5 +1,6 @@
 package com.project.fitready.entity;
 
+import com.project.fitready.domain.TipoRefeicao;
 import com.project.fitready.dto.ReceitaRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,10 @@ public class Receita {
     private List<IngredienteReceita> ingredientesReceita;
     private String modoPreparo;
     private Long tempoPreparo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_tipo_refeicao")
+    private TipoRefeicao tipoRefeicao;
     private Long calorias;
     private Long proteinas;
     private Long carboidratos;

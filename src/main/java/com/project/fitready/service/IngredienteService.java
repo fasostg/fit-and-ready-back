@@ -1,9 +1,7 @@
 package com.project.fitready.service;
 
 import com.project.fitready.domain.Ingrediente;
-import com.project.fitready.domain.UnidadeMedida;
 import com.project.fitready.repository.IngredienteRepository;
-import com.project.fitready.repository.UnidadeMedidaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

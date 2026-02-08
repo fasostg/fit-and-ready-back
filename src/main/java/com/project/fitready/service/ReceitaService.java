@@ -44,13 +44,25 @@ public class ReceitaService {
         repository.delete(receita);
     }
 
+    public void atualizarReceita(ReceitaRequestDTO receitaDTO) {
+        Receita receita = buscarPorId(receitaDTO.id());
+        setarCamposReceita(receita, receitaDTO);
+
+        repository.save(receita);
+    }
+
     public Receita converterReceita(ReceitaRequestDTO dto) {
         if (dto == null) {
             return null;
         }
 
         Receita receita = new Receita();
+        setarCamposReceita(receita, dto);
 
+        return receita;
+    }
+
+    private void setarCamposReceita(Receita receita, ReceitaRequestDTO dto) {
         receita.setNome(dto.nome());
         receita.setIngredientesReceita(
             dto.ingredientesReceita().stream()
@@ -64,8 +76,6 @@ public class ReceitaService {
         receita.setTipoRefeicao(tipoRefeicao);
 
         calcularAndSetarMacros(receita, dto);
-
-        return receita;
     }
 
     private void calcularAndSetarMacros(Receita receita, ReceitaRequestDTO dto) {
@@ -89,4 +99,5 @@ public class ReceitaService {
         receita.setCarboidratos(Math.round(carboidratos));
         receita.setGorduras(Math.round(gorduras));
     }
+
 }

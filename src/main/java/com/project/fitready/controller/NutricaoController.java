@@ -1,9 +1,6 @@
 package com.project.fitready.controller;
 
-import com.project.fitready.dto.IngredienteDTO;
-import com.project.fitready.dto.ReceitaRequestDTO;
-import com.project.fitready.dto.ReceitaResponseDTO;
-import com.project.fitready.dto.TipoRefeicaoDTO;
+import com.project.fitready.dto.*;
 import com.project.fitready.entity.Receita;
 import com.project.fitready.service.IngredienteService;
 import com.project.fitready.service.ReceitaService;
@@ -46,6 +43,13 @@ public class NutricaoController {
     public void postReceita(@RequestBody ReceitaRequestDTO receitaDTO) {
         Receita receita = receitaService.converterReceita(receitaDTO);
         receitaService.cadastrarReceita(receita);
+    }
+
+    @PatchMapping
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @Transactional
+    public void updateTreino(@RequestBody ReceitaRequestDTO receitaDTO) {
+        receitaService.atualizarReceita(receitaDTO);
     }
 
     @GetMapping(path="/tipos-refeicao")

@@ -1,12 +1,15 @@
 package com.project.fitready.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public record ReceitaRequestDTO(
         Long id,
-        String nome,
-        List<IngredienteReceitaDTO> ingredientesReceita,
-        String modoPreparo,
-        Long tempoPreparo,
-        TipoRefeicaoDTO tipoRefeicao) {
+        @NotBlank String nome,
+        @NotNull List<IngredienteReceitaDTO> ingredientesReceita,
+        @NotBlank String modoPreparo,
+        @NotNull Long tempoPreparo,
+        @NotNull TipoRefeicaoDTO tipoRefeicao) {
 }

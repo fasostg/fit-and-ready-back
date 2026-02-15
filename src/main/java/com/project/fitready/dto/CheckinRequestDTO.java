@@ -1,14 +1,17 @@
 package com.project.fitready.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.util.List;
 
 public record CheckinRequestDTO(
-        Long idTreino,
-        Long tempoTreino,
-        String dataTreino,
+        @NotNull Long idTreino,
+        @NotNull Long tempoTreino,
+        @NotBlank String dataTreino,
         Long calorias,
-        Double peso,
-        Long idIntensidade,
-        List<ExercicioDTO> exercicios) {
+        @NotNull Double peso,
+        @NotNull Long idIntensidade,
+        @NotNull List<ExercicioDTO> exercicios) {
 
 }

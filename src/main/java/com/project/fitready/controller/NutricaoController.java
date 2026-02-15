@@ -6,6 +6,7 @@ import com.project.fitready.service.IngredienteService;
 import com.project.fitready.service.ReceitaService;
 import com.project.fitready.service.TipoRefeicaoService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class NutricaoController {
     @PostMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
-    public void postReceita(@RequestBody ReceitaRequestDTO receitaDTO) {
+    public void postReceita(@RequestBody @Valid ReceitaRequestDTO receitaDTO) {
         Receita receita = receitaService.converterReceita(receitaDTO);
         receitaService.cadastrarReceita(receita);
     }
@@ -48,7 +49,7 @@ public class NutricaoController {
     @PatchMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
-    public void updateTreino(@RequestBody ReceitaRequestDTO receitaDTO) {
+    public void updateTreino(@RequestBody @Valid ReceitaRequestDTO receitaDTO) {
         receitaService.atualizarReceita(receitaDTO);
     }
 

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Table(name = "receita")
@@ -23,7 +24,7 @@ public class Receita {
     private String nome;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IngredienteReceita> ingredientesReceita;
+    private List<IngredienteReceita> ingredientesReceita = new ArrayList<>();
     private String modoPreparo;
     private Long tempoPreparo;
 

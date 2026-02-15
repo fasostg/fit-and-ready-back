@@ -1,9 +1,8 @@
 package com.project.fitready.service;
 
 import com.project.fitready.dto.CheckinRequestDTO;
-import com.project.fitready.dto.DadosHistoricoCompletoDTO;
-import com.project.fitready.dto.DadosHistoricoDTO;
-import com.project.fitready.dto.TipoExercicioDTO;
+import com.project.fitready.dto.DadosHistoricoCompletoResponseDTO;
+import com.project.fitready.dto.DadosHistoricoResponseDTO;
 import com.project.fitready.entity.Checkin;
 import com.project.fitready.entity.Treino;
 import com.project.fitready.enums.IntensidadeEnum;
@@ -99,7 +98,7 @@ public class CheckinService {
         return new DadosExerciciosJson(exercicios);
     }
 
-    public List<DadosHistoricoDTO> buscarTempoTreinoPorPeriodo(PeriodoEnum periodo) {
+    public List<DadosHistoricoResponseDTO> buscarTempoTreinoPorPeriodo(PeriodoEnum periodo) {
         if (periodo == null) {
             throw new RuntimeException("Período de busca inválido.");
         }
@@ -109,7 +108,7 @@ public class CheckinService {
         return repository.buscarTempoTreinoPorDataApos(dataInicio);
     }
 
-    public List<DadosHistoricoDTO> buscarCaloriasTreinoPorPeriodo(PeriodoEnum periodo) {
+    public List<DadosHistoricoResponseDTO> buscarCaloriasTreinoPorPeriodo(PeriodoEnum periodo) {
         if (periodo == null) {
             throw new RuntimeException("Período de busca inválido.");
         }
@@ -119,7 +118,7 @@ public class CheckinService {
         return repository.buscarCaloriasTreinoPorDataApos(dataInicio);
     }
 
-    public List<DadosHistoricoCompletoDTO> buscarDadosExerciciosUsuario(PeriodoEnum periodo) {
+    public List<DadosHistoricoCompletoResponseDTO> buscarDadosExerciciosUsuario(PeriodoEnum periodo) {
         if (periodo == null) {
             throw new RuntimeException("Período de busca inválido.");
         }
@@ -129,7 +128,7 @@ public class CheckinService {
 
         return checkins.stream()
                 .map(checkin -> checkin.getDadosExercicios().getExercicios().stream()
-                        .map(exercicioJson -> new DadosHistoricoCompletoDTO(
+                        .map(exercicioJson -> new DadosHistoricoCompletoResponseDTO(
                                 exercicioJson.getIdTipoExercicio(),
                                 exercicioJson.getNomeTipoExercicio(),
                                 checkin.getData().format(DateTimeFormatter.ofPattern("dd/MM")),

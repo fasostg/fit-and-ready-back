@@ -6,6 +6,7 @@ import com.project.fitready.service.TipoExercicioService;
 import com.project.fitready.service.TipoTreinoService;
 import com.project.fitready.service.TreinoService;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +37,7 @@ public class TreinoController {
     @PostMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
-    public void postTreino(@RequestBody TreinoRequestDTO treinoDTO) {
+    public void postTreino(@RequestBody @Valid TreinoRequestDTO treinoDTO) {
         treinoService.criarTreino(treinoDTO);
     }
 
@@ -50,7 +51,7 @@ public class TreinoController {
     @PatchMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
-    public void updateTreino(@RequestBody TreinoRequestDTO treinoDTO) {
+    public void updateTreino(@RequestBody @Valid TreinoRequestDTO treinoDTO) {
         treinoService.atualizarTreino(treinoDTO);
     }
 

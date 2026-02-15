@@ -1,6 +1,5 @@
 package com.project.fitready.dto;
 
-import com.project.fitready.entity.IngredienteReceita;
 import com.project.fitready.entity.Receita;
 
 import java.util.List;

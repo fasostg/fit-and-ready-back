@@ -5,6 +5,7 @@ import com.project.fitready.entity.Checkin;
 import com.project.fitready.enums.PeriodoEnum;
 import com.project.fitready.service.CheckinService;
 import com.project.fitready.service.IntensidadeService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class CheckinController {
 
     @PostMapping
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public ResponseEntity<Void> postCheckin(@RequestBody CheckinRequestDTO checkinDTO) {
+    public ResponseEntity<Void> postCheckin(@RequestBody @Valid CheckinRequestDTO checkinDTO) {
         Checkin checkin = checkinService.converterDTO(checkinDTO);
         checkinService.cadastrarCheckin(checkin);
         return ResponseEntity.ok().build();
@@ -43,26 +44,19 @@ public class CheckinController {
 
     @GetMapping(path="/tempo-treino")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public List<DadosHistoricoDTO> getTempoTreino(@RequestParam String periodo) {
+    public List<DadosHistoricoResponseDTO> getTempoTreino(@RequestParam String periodo) {
         return checkinService.buscarTempoTreinoPorPeriodo(PeriodoEnum.getByName(periodo));
     }
 
     @GetMapping(path="/calorias-treino")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public List<DadosHistoricoDTO> getCaloriasTreino(@RequestParam String periodo) {
+    public List<DadosHistoricoResponseDTO> getCaloriasTreino(@RequestParam String periodo) {
         return checkinService.buscarCaloriasTreinoPorPeriodo(PeriodoEnum.getByName(periodo));
     }
 
     @GetMapping(path="/dados-exercicios")
     @CrossOrigin(origins = "*", allowedHeaders = "*")
-    public List<DadosHistoricoCompletoDTO> getDadosExercicios(@RequestParam String periodo) {
+    public List<DadosHistoricoCompletoResponseDTO> getDadosExercicios(@RequestParam String periodo) {
         return checkinService.buscarDadosExerciciosUsuario(PeriodoEnum.getByName(periodo));
     }
-
-//    @GetMapping(path="/carga-treino")
-//    @CrossOrigin(origins = "*", allowedHeaders = "*")
-//    public List<DadosHistoricoDTO> getCargaPorExercicio(@RequestParam Long idTipoExercicio) {
-//        return checkinService.buscarCargaPorTipoExercicio(idTipoExercicio);
-//    }
-
 }

@@ -64,11 +64,9 @@ public class ReceitaService {
 
     private void setarCamposReceita(Receita receita, ReceitaRequestDTO dto) {
         receita.setNome(dto.nome());
-        receita.setIngredientesReceita(
-            dto.ingredientesReceita().stream()
-                .map(i -> ingredienteReceitaService.converterIngredienteReceita(receita, i))
-                .toList()
-        );
+
+        setarIngredientesReceita(receita, dto);
+
         receita.setModoPreparo(dto.modoPreparo());
         receita.setTempoPreparo(dto.tempoPreparo());
 
@@ -76,6 +74,15 @@ public class ReceitaService {
         receita.setTipoRefeicao(tipoRefeicao);
 
         calcularAndSetarMacros(receita, dto);
+    }
+
+    private void setarIngredientesReceita(Receita receita, ReceitaRequestDTO dto) {
+        receita.getIngredientesReceita().clear();
+
+        for (IngredienteReceitaDTO ingredienteReceitaDTO : dto.ingredientesReceita()) {
+            IngredienteReceita ingredienteReceita = ingredienteReceitaService.converterIngredienteReceita(receita, ingredienteReceitaDTO);
+            receita.getIngredientesReceita().add(ingredienteReceita);
+        }
     }
 
     private void calcularAndSetarMacros(Receita receita, ReceitaRequestDTO dto) {

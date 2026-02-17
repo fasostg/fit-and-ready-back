@@ -16,7 +16,7 @@ import java.io.IOException;
 @Component
 public class JWTFilter extends OncePerRequestFilter {
 
-    private final String KEY = "5c3fcd32cf7c61113393a35fa580591e";
+    private final String KEY = "24faba635f59db2e2bf71c624b321188";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)

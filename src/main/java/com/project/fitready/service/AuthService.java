@@ -17,7 +17,9 @@ public class AuthService {
     private JWTService jwtService;
 
     public String login(LoginRequestDTO dto) {
-        var usuario = usuarioRepository.findByCpf(dto.cpf())
+        var cpf = removerMascaraCpf(dto.cpf());
+
+        var usuario = usuarioRepository.findByCpf(cpf)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
         var encoder = jwtService.passwordEncoder();
@@ -41,6 +43,10 @@ public class AuthService {
         usuario.setSenha(encoder.encode(dto.senha()));
 
         usuarioRepository.save(usuario);
+    }
+
+    private String removerMascaraCpf(String cpf) {
+        return  cpf.replaceAll("[^0-9]", "");
     }
 
 }

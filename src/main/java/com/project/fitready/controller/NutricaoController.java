@@ -26,7 +26,6 @@ public class NutricaoController {
     private IngredienteService ingredienteService;
 
     @GetMapping(path="/all")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<ReceitaResponseDTO> getAll() {
         return receitaService.buscarTodasReceitas().stream()
             .map(ReceitaResponseDTO::new)
@@ -34,12 +33,10 @@ public class NutricaoController {
     }
 
     @DeleteMapping(path="/{id}")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
     public void deleteReceita(@PathVariable Long id) { receitaService.deletarReceita(id); }
 
     @PostMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
     public void postReceita(@RequestBody @Valid ReceitaRequestDTO receitaDTO) {
         Receita receita = receitaService.converterReceita(receitaDTO);
@@ -47,20 +44,17 @@ public class NutricaoController {
     }
 
     @PatchMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     @Transactional
     public void updateTreino(@RequestBody @Valid ReceitaRequestDTO receitaDTO) {
         receitaService.atualizarReceita(receitaDTO);
     }
 
     @GetMapping(path="/tipos-refeicao")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<TipoRefeicaoDTO> getTiposRefeicao() {
         return tipoRefeicaoService.buscarTodos().stream().map(TipoRefeicaoDTO::new).toList();
     }
 
     @GetMapping(path="/ingredientes")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<IngredienteDTO> getIngredientes() {
         return ingredienteService.buscarTodos().stream().map(IngredienteDTO::new).toList();
     }

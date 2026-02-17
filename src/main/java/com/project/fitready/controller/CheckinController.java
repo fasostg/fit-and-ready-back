@@ -23,13 +23,11 @@ public class CheckinController {
     private IntensidadeService intensidadeService;
 
     @GetMapping(path="/all")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<CheckinResponseDTO> getAll() {
         return checkinService.buscarTodosCheckinsPorUsuario().stream().map(CheckinResponseDTO::new).toList();
     }
 
     @PostMapping
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public ResponseEntity<Void> postCheckin(@RequestBody @Valid CheckinRequestDTO checkinDTO) {
         Checkin checkin = checkinService.converterDTO(checkinDTO);
         checkinService.cadastrarCheckin(checkin);
@@ -37,25 +35,21 @@ public class CheckinController {
     }
 
     @GetMapping(path="/intensidades")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<IntensidadeDTO> getIntensidades() {
         return intensidadeService.buscarTodos().stream().map(IntensidadeDTO::new).toList();
     }
 
     @GetMapping(path="/tempo-treino")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<DadosHistoricoResponseDTO> getTempoTreino(@RequestParam String periodo) {
         return checkinService.buscarTempoTreinoPorPeriodo(PeriodoEnum.getByName(periodo));
     }
 
     @GetMapping(path="/calorias-treino")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<DadosHistoricoResponseDTO> getCaloriasTreino(@RequestParam String periodo) {
         return checkinService.buscarCaloriasTreinoPorPeriodo(PeriodoEnum.getByName(periodo));
     }
 
     @GetMapping(path="/dados-exercicios")
-    @CrossOrigin(origins = "*", allowedHeaders = "*")
     public List<DadosHistoricoCompletoResponseDTO> getDadosExercicios(@RequestParam String periodo) {
         return checkinService.buscarDadosExerciciosUsuario(PeriodoEnum.getByName(periodo));
     }

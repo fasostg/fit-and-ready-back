@@ -35,5 +35,7 @@ public class Checkin {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "js_dados_exercicios", columnDefinition = "jsonb")
     private DadosExerciciosJson dadosExercicios;
+    @Column(name = "cpf_usuario")
+    private String cpfUsuario;
 
 }

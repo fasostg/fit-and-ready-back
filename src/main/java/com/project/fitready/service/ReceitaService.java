@@ -27,8 +27,11 @@ public class ReceitaService {
     @Autowired
     private TipoRefeicaoService tipoRefeicaoService;
 
-    public List<Receita> buscarTodasReceitas() {
-        return repository.findAll();
+    @Autowired
+    private UsuarioService usuarioService;
+
+    public List<Receita> buscarTodasReceitasPorUsuario() {
+        return repository.findByCpfUsuarioOrderByIdDesc(usuarioService.getCpfUsuarioLogado());
     }
 
     public Receita buscarPorId(Long id) {
@@ -59,6 +62,7 @@ public class ReceitaService {
         Receita receita = new Receita();
         setarCamposReceita(receita, dto);
 
+        receita.setCpfUsuario(usuarioService.getCpfUsuarioLogado());
         return receita;
     }
 

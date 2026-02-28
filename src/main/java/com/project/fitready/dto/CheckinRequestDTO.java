@@ -8,7 +8,7 @@ import java.util.List;
 public record CheckinRequestDTO(
         @NotNull Long idTreino,
         @NotNull Long tempoTreino,
-        @NotBlank String dataTreino,
+        String dataTreino,
         Long calorias,
         @NotNull Double peso,
         @NotNull Long idIntensidade,

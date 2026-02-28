@@ -35,4 +35,7 @@ public class Receita {
     private Long proteinas;
     private Long carboidratos;
     private Long gorduras;
+
+    @Column(name = "cpf_usuario")
+    private String cpfUsuario;
 }

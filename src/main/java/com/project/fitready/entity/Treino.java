@@ -30,4 +30,6 @@ public class Treino {
 
     private LocalDate dataInicio;
     private LocalDate dataFim;
+    @Column(name = "cpf_usuario")
+    private String cpfUsuario;
 }

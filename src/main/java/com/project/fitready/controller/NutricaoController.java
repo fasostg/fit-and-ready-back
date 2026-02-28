@@ -27,7 +27,7 @@ public class NutricaoController {
 
     @GetMapping(path="/all")
     public List<ReceitaResponseDTO> getAll() {
-        return receitaService.buscarTodasReceitas().stream()
+        return receitaService.buscarTodasReceitasPorUsuario().stream()
             .map(ReceitaResponseDTO::new)
             .toList();
     }

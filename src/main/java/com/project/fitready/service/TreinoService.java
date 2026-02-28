@@ -8,6 +8,7 @@ import com.project.fitready.entity.Treino;
 import com.project.fitready.repository.CheckinRepository;
 import com.project.fitready.repository.ExercicioRepository;
 import com.project.fitready.repository.TreinoRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,8 +33,11 @@ public class TreinoService {
     @Autowired
     private TipoTreinoService tipoTreinoService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     public List<Treino> buscarTodosTreinosPorUsuario() {
-        return repository.findAll();
+        return repository.findByCpfUsuarioOrderByIdDesc(usuarioService.getCpfUsuarioLogado());
     }
 
     public Treino buscaPorId(Long idTreino) {
@@ -62,6 +66,8 @@ public class TreinoService {
         Treino treino = new Treino();
 
         setarCamposTreino(treino, dto);
+
+        treino.setCpfUsuario(usuarioService.getCpfUsuarioLogado());
         return treino;
     }
 

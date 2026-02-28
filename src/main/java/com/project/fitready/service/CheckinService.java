@@ -10,6 +10,7 @@ import com.project.fitready.enums.PeriodoEnum;
 import com.project.fitready.json.DadosExerciciosJson;
 import com.project.fitready.json.ExercicioJson;
 import com.project.fitready.repository.CheckinRepository;
+import com.project.fitready.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,8 +33,11 @@ public class CheckinService {
     @Autowired
     private TreinoService treinoService;
 
+    @Autowired
+    private UsuarioService usuarioService;
+
     public List<Checkin> buscarTodosCheckinsPorUsuario() {
-        return repository.findAll();
+        return repository.findByCpfUsuarioOrderByIdDesc(usuarioService.getCpfUsuarioLogado());
     }
 
     public void cadastrarCheckin(Checkin checkin) {
@@ -55,6 +59,7 @@ public class CheckinService {
         ajustarDadosTreino(treino, checkinDTO);
 
         checkin.setDadosExercicios(criarDadosExerciciosJson(treino));
+        checkin.setCpfUsuario(usuarioService.getCpfUsuarioLogado());
 
         return checkin;
     }

@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface CheckinRepository extends JpaRepository<Checkin, Long> {
 
+    List<Checkin> findByCpfUsuarioOrderByIdDesc(String cpfUsuario);
+
     @Query("""
         SELECT new com.project.fitready.dto.DadosHistoricoResponseDTO(
             CAST(FUNCTION('to_char', c.data, 'DD/MM') AS string),
@@ -20,7 +22,7 @@ public interface CheckinRepository extends JpaRepository<Checkin, Long> {
         GROUP BY c.data
         ORDER BY c.data ASC
     """)
-    public List<DadosHistoricoResponseDTO> buscarTempoTreinoPorDataApos(LocalDate dataInicio);
+    List<DadosHistoricoResponseDTO> buscarTempoTreinoPorDataApos(LocalDate dataInicio);
 
     @Query("""
         SELECT new com.project.fitready.dto.DadosHistoricoResponseDTO(
@@ -32,7 +34,7 @@ public interface CheckinRepository extends JpaRepository<Checkin, Long> {
         GROUP BY c.data
         ORDER BY c.data ASC
     """)
-    public List<DadosHistoricoResponseDTO> buscarCaloriasTreinoPorDataApos(LocalDate dataInicio);
+    List<DadosHistoricoResponseDTO> buscarCaloriasTreinoPorDataApos(LocalDate dataInicio);
 
     @Query("""
         SELECT c
@@ -40,5 +42,5 @@ public interface CheckinRepository extends JpaRepository<Checkin, Long> {
         WHERE c.data > :dataInicio
         ORDER BY c.data ASC
     """)
-    public List<Checkin> buscarPorDataApos(LocalDate dataInicio);
+    List<Checkin> buscarPorDataApos(LocalDate dataInicio);
 }

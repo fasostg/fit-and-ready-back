@@ -37,7 +37,7 @@ public class AuthService {
 
         var usuario = new Usuario();
         usuario.setNome(dto.nome());
-        usuario.setCpf(dto.cpf());
+        usuario.setCpf(removerMascaraCpf(dto.cpf()));
 
         var encoder = jwtService.passwordEncoder();
         usuario.setSenha(encoder.encode(dto.senha()));

@@ -45,7 +45,7 @@ public class NutricaoController {
 
     @PatchMapping
     @Transactional
-    public void updateTreino(@RequestBody @Valid ReceitaRequestDTO receitaDTO) {
+    public void updateReceita(@RequestBody @Valid ReceitaRequestDTO receitaDTO) {
         receitaService.atualizarReceita(receitaDTO);
     }
 

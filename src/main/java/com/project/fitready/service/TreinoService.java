@@ -4,6 +4,7 @@ import com.project.fitready.domain.TipoExercicio;
 import com.project.fitready.dto.*;
 import com.project.fitready.entity.Checkin;
 import com.project.fitready.entity.Exercicio;
+import com.project.fitready.entity.IngredienteReceita;
 import com.project.fitready.entity.Treino;
 import com.project.fitready.repository.CheckinRepository;
 import com.project.fitready.repository.ExercicioRepository;
@@ -74,12 +75,21 @@ public class TreinoService {
     private void setarCamposTreino(Treino treino, TreinoRequestDTO dto) {
         treino.setNome(dto.nome());
         treino.setTipoTreino(tipoTreinoService.buscarPorId(dto.tipoTreino().id()));
-        treino.setExercicios(dto.exercicios().stream().map(exercicioDTO -> {
+
+        setarCampoExercicios(treino, dto);
+
+        treino.setDataInicio(LocalDate.parse(dto.dataInicio(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+    }
+
+    private void setarCampoExercicios(Treino treino, TreinoRequestDTO dto) {
+        treino.getExercicios().clear();
+
+        for (ExercicioDTO exercicioDTO : dto.exercicios()) {
             Exercicio exercicio = converterExercicioDTO(exercicioDTO);
             exercicio.setTreino(treino);
-            return exercicio;
-        }).toList());
-        treino.setDataInicio(LocalDate.parse(dto.dataInicio(), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+            treino.getExercicios().add(exercicio);
+        }
     }
 
     public Exercicio converterExercicioDTO(ExercicioDTO dto) {

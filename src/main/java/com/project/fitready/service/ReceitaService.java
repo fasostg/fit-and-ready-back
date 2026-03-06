@@ -84,7 +84,8 @@ public class ReceitaService {
         receita.getIngredientesReceita().clear();
 
         for (IngredienteReceitaDTO ingredienteReceitaDTO : dto.ingredientesReceita()) {
-            IngredienteReceita ingredienteReceita = ingredienteReceitaService.converterIngredienteReceita(receita, ingredienteReceitaDTO);
+            IngredienteReceita ingredienteReceita =
+                    ingredienteReceitaService.converterIngredienteReceita(receita, ingredienteReceitaDTO);
             receita.getIngredientesReceita().add(ingredienteReceita);
         }
     }
